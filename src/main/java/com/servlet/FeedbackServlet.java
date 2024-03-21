@@ -11,7 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class FeedbackServlet extends HttpServlet {
-
+    public void init() throws ServletException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new ServletException("JDBC Driver not found", e);
+        }
+    }
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          String name = req.getParameter("name");
